@@ -4,11 +4,18 @@ import Main from "./components/layout/Main";
 
 
 
+// # IMPORT CONTEXT
+import { MoviesProvider } from "./contexts/MoviesContext";
+
+
+
 function App() {
   return (
     <>
-      <Header />
-      <Main />
+      <MoviesProvider>
+        <Header />
+        <Main />
+      </MoviesProvider>
     </>
   );
 };
