@@ -1,20 +1,16 @@
-// Import Bootstrap’s CSS
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-// Import Bootstrap’s JS
-import * as bootstrap from 'bootstrap';
-
-// Import custom CSS
-import './App.css';
+// # IMPORTS COMPONENTI
+import Main from "./components/layout/Main";
 
 
 
 function App() {
   return (
     <>
-      <h1>APP</h1>
+      <Main />
     </>
   );
 };
+
+
 
 export default App;
