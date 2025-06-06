@@ -1,13 +1,35 @@
+import { useMovies } from "../../contexts/MoviesContext";
+
+
+
 export default function Main () {
 
-    const appName = import.meta.env.VITE_APP_NAME;
+    const { movies } = useMovies();
+    // console.debug(movies);
 
     return (
         <section className="py-5">
             <div className="container">
-                <h1>
-                    {appName}
-                </h1>
+                {
+                    movies.length > 0 ?
+                    movies.map(movie => {
+                        return (
+                            <ul key={movie.id}>
+                                <li>
+                                    {movie.title} ({movie.originalLanguage})
+                                </li>
+                                <li>
+                                    {movie.originalTitle}
+                                </li>
+                                <li>
+                                    {movie.voteAverage}
+                                </li>
+                            </ul>
+                        )
+                    })
+                    :
+                    ""
+                }
             </div>
         </section>
     );

@@ -1,5 +1,5 @@
-import { createContext, useContext } from "react";
-
+import { createContext, useContext, useState } from "react";
+import axios from "axios";
 
 
 const MoviesContext = createContext();
@@ -7,9 +7,59 @@ const MoviesContext = createContext();
 
 
 function MoviesProvider ({ children }) {
-    const exportObj = {
-        prop: "to export",
+
+    const apiUrl = import.meta.env.VITE_API_URL;
+    const apiKey = import.meta.env.VITE_API_KEY;
+    const language = import.meta.env.VITE_APP_LANGUAGE;
+
+    
+
+    const [movies, setMovies] = useState([]);
+
+
+
+    const search = (searchData) => {
+        // console.debug(apiKey);
+        // console.debug(apiUrl);
+        // console.debug(searchData);
+        
+        const queryData = {
+            language,
+            api_key: apiKey,
+            query: searchData,
+        };
+        const queryString = new URLSearchParams(queryData).toString();
+        // console.debug(queryString);
+
+        axios.
+            get(`${apiUrl}/search/movie?${queryString}`)
+            .then(response => {
+                // console.info(response.data);
+                // console.info(response.data.results);
+                const movies = response.data.results.map(movie => ({ 
+                    id: movie.id, 
+                    title: movie.title, 
+                    originalTitle: movie.original_title, 
+                    voteAverage: movie.vote_average, 
+                    originalLanguage: movie.original_language, 
+                }))
+                console.info(movies);
+
+                setMovies(movies);
+            })
+            .catch(error => {
+                console.error(error);
+            });
     };
+
+
+
+    const exportObj = {
+        movies,
+        search,
+    };
+    // console.debug("exportObj");
+    // console.debug(exportObj);
 
     return (
         <MoviesContext.Provider value={exportObj} >

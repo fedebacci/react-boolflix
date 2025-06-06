@@ -1,9 +1,13 @@
 import { useState } from "react";
-
+import { useMovies } from "../../contexts/MoviesContext";
 
 
 
 export default function Header () {
+
+    const { search } = useMovies();
+    // console.debug(search);
+    
 
     // todo: Trasformare in oggetto per ricerca testo E genere
     const [searchData, setSearchData] = useState("");
@@ -14,8 +18,17 @@ export default function Header () {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        console.info(searchData);
+        // console.info(searchData);
+
+        search(searchData);
     };
+
+
+
+
+
+ 
+
 
 
     return (
