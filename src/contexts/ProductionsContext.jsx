@@ -9,6 +9,7 @@ const  ProductionsContext = createContext();
 function  ProductionsProvider ({ children }) {
 
     const apiUrl = import.meta.env.VITE_THEMOVIEDB_API_URL;
+    const apiBaseImageUrl = import.meta.env.VITE_THEMOVIEDB_API_BASEIMAGE_URL;
     const apiKey = import.meta.env.VITE_THEMOVIEDB_API_KEY;
     const language = import.meta.env.VITE_APP_LANGUAGE;
 
@@ -26,6 +27,7 @@ function  ProductionsProvider ({ children }) {
         // console.log(`${flagsApiBaseUrl}/${countryLangCode.toUpperCase()}/flat/64.png`);
 
         // # NB: xx sta per ignota --> METTERE PLACEHOLDER
+        // # VEDI QUI: https://github.com/lipis/flag-icons/issues/510
 
         // * en --> gb (gran bretagna) - us (stati uniti)
         if (countryLangCode === 'en') countryLangCode = 'gb';
@@ -51,7 +53,7 @@ function  ProductionsProvider ({ children }) {
             get(`${apiUrl}/search/movie?${queryString}`)
             .then(response => {
                 // console.info("response.data.results", response.data.results);
-                // console.info("response.data.results[0]", response.data.results[0]);
+                console.info("response.data.results[0]", response.data.results[0]);
                 const movies = response.data.results.map(movie => ({ 
                     id: movie.id, 
                     title: movie.title, 
@@ -60,6 +62,7 @@ function  ProductionsProvider ({ children }) {
                     originalLanguage: movie.original_language,
                     
                     countryFlag: getFlagByCountryLangCode(movie.original_language),
+                    image: apiBaseImageUrl + '/' + movie.poster_path,
                 }));
 
                 setMovies(movies);
@@ -74,7 +77,7 @@ function  ProductionsProvider ({ children }) {
             get(`${apiUrl}/search/tv?${queryString}`)
             .then(response => {
                 // console.info("response.data.results", response.data.results);
-                // console.info("response.data.results[0]", response.data.results[0]);
+                console.info("response.data.results[0]", response.data.results[0]);
                 const series = response.data.results.map(serie => ({ 
                     id: serie.id, 
                     title: serie.name, 
@@ -83,6 +86,7 @@ function  ProductionsProvider ({ children }) {
                     originalLanguage: serie.original_language, 
 
                     countryFlag: getFlagByCountryLangCode(serie.original_language),
+                    image: apiBaseImageUrl + '/' + serie.poster_path,
                 }));
 
                 setSeries(series);

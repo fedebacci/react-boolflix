@@ -21,28 +21,29 @@ export default function ProductionsList ({ productions, title, children }) {
                     return (
                         <div key={production.id} className="card shadow my-3 p-3">
                             <p className="mb-0">
-                                <strong>
+                                <strong className="me-3">
                                     {production.title}
                                 </strong>
-                            </p>
-                            <img 
-                                src={production.countryFlag} 
-                                alt={production.originalLanguage} 
+                                <img 
+                                    src={production.countryFlag} 
+                                    alt={production.originalLanguage} 
 
-                                className="country-flag"
-                            />
+                                    className="country-flag"
+                                />
+                            </p>
+                            <img className="poster" src={production.image} alt={production.title} />
                             {/* <a href={production.countryFlag} target="_blank">
                                 {production.countryFlag}
                             </a> */}
                             <ul className="mb-0">
+                                {/* <li>
+                                    Original language: {production.originalLanguage}
+                                </li> */}
                                 <li>
-                                    {production.originalLanguage}
+                                    Original title: {production.originalTitle}
                                 </li>
                                 <li>
-                                    {production.originalTitle}
-                                </li>
-                                <li>
-                                    {production.voteAverage}
+                                    Vote average: {production.voteAverage}
                                 </li>
                             </ul>
                         </div>
