@@ -14,23 +14,26 @@ main {
 
 
 
-.production-column {
+
+
+.production-card {
     aspect-ratio: 342/513;
+    overflow: hidden;
+    position: relative;
     overflow: hidden;
 }
 
 .poster {
     object-fit: cover;
-    
-    /* * DEBUG */
-    filter: drop-shadow(0 0 1px rgba(0,0,0,.5));
 }
-/* * DEBUG (METTERE IN TRASPARENZA SUL POSTER */
-.movie-details {    
-    background-color: #222;
+.movie-details {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0,0,0,0.9);
 }
 .movie-details > .h-100 {
     font-size: .9rem;
+    text-decoration: none;
     color: #fff;
     overflow: hidden;
     text-overflow: ellipsis;

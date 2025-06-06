@@ -9,21 +9,27 @@ export default function ProductionCard ({ production }) {
     const [isShowDetails, setIsShowDetails] = useState(false);
     
     const handleMouseEnter = () => {
-        // console.log("handleMouseEnter", production);
+        // console.info("handleMouseEnter", production);
         setIsShowDetails(true);
     };
     const handleMouseLeave = () => {
-        // console.log("handleMouseLeave", production);
+        // console.info("handleMouseLeave", production);
         setIsShowDetails(false);
     };
 
     return (
-        <div className="col-3 production-column">
-            <div 
+        <div className="col-3">
+            <a 
                 onMouseEnter={() => handleMouseEnter()}
                 onMouseLeave={() => handleMouseLeave()}
-                className="production-card h-100"
+                className="production-card d-block h-100"
+                href="#"
             >
+                <img
+                    src={production.image}
+                    alt={production.title}
+                    className="poster h-100"
+                />
 
                 {
                     isShowDetails ?
@@ -57,24 +63,25 @@ export default function ProductionCard ({ production }) {
                                     })
                                 }
                             </p>
-                            <p className="mb-0">
-                                <strong>
-                                    Overview:
-                                </strong>
-                                {" "}
-                                {production.overview}
-                            </p>
+                            {
+                                production.overview !== "" ?
+                                <p className="mb-0">
+                                    <strong>
+                                        Overview:
+                                    </strong>
+                                    {" "}
+                                    {production.overview}
+                                </p>
+                                :
+                                ""
+                            }
                         </div>
                     </div>
                     :
-                    <img
-                        src={production.image}
-                        alt={production.title}
-                        className="poster h-100"
-                    />
+                    ""
                 }
 
-            </div>
+            </a>
         </div>
     );
 };
