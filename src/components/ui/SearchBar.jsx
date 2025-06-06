@@ -33,7 +33,7 @@ export default function SearchBar () {
             <button 
                 onClick={handleFormSubmit}
 
-                className="btn btn-outline-success" 
+                className="btn btn-outline-light" 
                 type="submit"
             >
                 <FontAwesomeIcon icon={faMagnifyingGlass} />

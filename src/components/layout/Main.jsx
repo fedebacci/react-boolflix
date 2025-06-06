@@ -15,23 +15,17 @@ export default function Main () {
                         // title="Movies (title)"
                         productions={movies}
                     >
-                        {/* <h2 className='mb-3'>
-                            Movies (children)
-                        </h2> */}
-                        <h2 className='mb-3'>
+                        <h3 className='mb-1'>
                             MOVIES
-                        </h2>
+                        </h3>
                     </ProductionsList>
                     <ProductionsList
                         // title="TV Series (title)"
                         productions={series}
                     >
-                        {/* <h2 className='mb-3'>
-                            TV Series (children)
-                        </h2> */}
-                        <h2 className='mb-3'>
+                        <h3 className='mb-1'>
                             TV SERIES
-                        </h2>
+                        </h3>
                     </ProductionsList>
                 </div>
             </section>

@@ -32,9 +32,7 @@ export default function ProductionCard ({ production }) {
                 />
 
                 {
-                    isShowDetails ?
-                    // * DEBUG
-                    // !isShowDetails ?
+                    isShowDetails &&
                     <div className="movie-details h-100 p-3">
                         <div className="h-100">
                             <p className="mb-0">
@@ -46,6 +44,12 @@ export default function ProductionCard ({ production }) {
                             </p>
                             <p className="mb-0">
                                 <strong>
+                                    <img
+                                        src={production.countryFlag}
+                                        alt={production.originalLanguage}
+                                        className="country-flag"
+                                    />
+                                    {" "}
                                     Titolo originale:
                                 </strong>
                                 {" "}
@@ -77,10 +81,7 @@ export default function ProductionCard ({ production }) {
                             }
                         </div>
                     </div>
-                    :
-                    ""
                 }
-
             </a>
         </div>
     );

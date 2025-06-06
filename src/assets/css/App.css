@@ -1,16 +1,33 @@
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.navbar-brand {
+    color: red;
+    font-weight: bold;
+}
+
+
+
 main {
     background-color: #333;
     color: #fff;
+
+    flex-grow: 1;
 }
 
 
 
 .country-flag {
-    max-width: 32px;
+    /* max-width: 1.5rem; */
+    max-width: 1.5em;
 
-    filter: drop-shadow(0 0 1px rgba(0,0,0,.5));
+    /* filter: drop-shadow(0 0 1px rgba(255,255,255,.5)); */
 }
-
 
 
 
@@ -42,12 +59,6 @@ main {
 
 
 
-/* * DEBUG */
 .fa-regular {
-    /* color: transparent; */
-    color: rgba(0,0,0,.5);
-
-    /* filter: drop-shadow(0 0 1px rgba(0,0,0,1));
-    border: 1px solid blue;
-    outline: 1px solid red; */
+    color: rgba(255,255,255,.25);
 }

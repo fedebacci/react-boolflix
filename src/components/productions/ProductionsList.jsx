@@ -8,9 +8,9 @@ export default function ProductionsList ({ productions, title, children }) {
                 children || 
                 (
                     title &&
-                    <h2 className='mb-3'>
+                    <h3 className='mb-1'>
                         {title}
-                    </h2>
+                    </h3>
                 )
             }
 
