@@ -5,17 +5,17 @@ import Main from "./components/layout/Main";
 
 
 // # IMPORT CONTEXT
-import { MoviesProvider } from "./contexts/MoviesContext";
+import { ProductionsProvider } from "./contexts/ProductionsContext";
 
 
 
 function App() {
   return (
     <>
-      <MoviesProvider>
+      <ProductionsProvider>
         <Header />
         <Main />
-      </MoviesProvider>
+      </ProductionsProvider>
     </>
   );
 };

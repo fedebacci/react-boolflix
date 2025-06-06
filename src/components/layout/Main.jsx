@@ -1,10 +1,10 @@
-import { useMovies } from "../../contexts/MoviesContext";
+import { useProductions } from "../../contexts/ProductionsContext";
 
 
 
 export default function Main () {
 
-    const { movies } = useMovies();
+    const { movies } = useProductions();
     // console.debug(movies);
 
     return (

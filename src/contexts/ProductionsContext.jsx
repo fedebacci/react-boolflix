@@ -2,11 +2,11 @@ import { createContext, useContext, useState } from "react";
 import axios from "axios";
 
 
-const MoviesContext = createContext();
+const  ProductionsContext = createContext();
 
 
 
-function MoviesProvider ({ children }) {
+function  ProductionsProvider ({ children }) {
 
     const apiUrl = import.meta.env.VITE_API_URL;
     const apiKey = import.meta.env.VITE_API_KEY;
@@ -62,18 +62,18 @@ function MoviesProvider ({ children }) {
     // console.debug(exportObj);
 
     return (
-        <MoviesContext.Provider value={exportObj} >
+        <ProductionsContext.Provider value={exportObj} >
             {children}
-        </MoviesContext.Provider>
+        </ProductionsContext.Provider>
     );
 };
 
 
 
-function useMovies () {
-    return useContext(MoviesContext);
+function useProductions () {
+    return useContext(ProductionsContext);
 }
 
 
 
-export { MoviesProvider, useMovies };
+export { ProductionsProvider, useProductions };

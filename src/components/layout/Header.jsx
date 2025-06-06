@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useMovies } from "../../contexts/MoviesContext";
+import { useProductions } from "../../contexts/ProductionsContext";
 
 
 
 export default function Header () {
 
-    const { search } = useMovies();
+    const { search } = useProductions();
     // console.debug(search);
     
 
