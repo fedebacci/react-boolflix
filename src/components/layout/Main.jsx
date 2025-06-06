@@ -26,7 +26,6 @@ export default function Main () {
                     title="Movies (title)"
                     productions={movies} 
                 />
-                <hr />
                 <ProductionsList
                     title="TV Series (title)"
                     productions={series} 
@@ -44,7 +43,6 @@ export default function Main () {
                         Movies (children)
                     </h2>
                 </ProductionsList>
-                <hr />
                 <ProductionsList
                     productions={series} 
                     >
@@ -66,7 +64,6 @@ export default function Main () {
                         Movies (children)
                     </h2>
                 </ProductionsList>
-                <hr />
                 <ProductionsList
                     title="TV Series (title)"
                     productions={series} 

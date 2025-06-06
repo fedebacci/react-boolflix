@@ -8,9 +8,11 @@ const  ProductionsContext = createContext();
 
 function  ProductionsProvider ({ children }) {
 
-    const apiUrl = import.meta.env.VITE_API_URL;
-    const apiKey = import.meta.env.VITE_API_KEY;
+    const apiUrl = import.meta.env.VITE_THEMOVIEDB_API_URL;
+    const apiKey = import.meta.env.VITE_THEMOVIEDB_API_KEY;
     const language = import.meta.env.VITE_APP_LANGUAGE;
+
+    const flagsApiBaseUrl = import.meta.env.VITE_FLAGSAPI_API_URL;
 
     
 
@@ -19,17 +21,46 @@ function  ProductionsProvider ({ children }) {
 
 
 
+
+    const getFlagByCountryLangCode = (countryLangCode) => {
+        // console.log(`${flagsApiBaseUrl}/${countryLangCode.toUpperCase()}/flat/64.png`);
+
+        // # NB: xx sta per ignota --> METTERE PLACEHOLDER
+
+        // * en --> gb (gran bretagna) - us (stati uniti)
+        if (countryLangCode === 'en') countryLangCode = 'gb';
+        if (countryLangCode === 'ja') countryLangCode = 'jp';
+        if (countryLangCode === 'te') countryLangCode = 'in';
+        // * ta --> in (india) - sg (singapore) - lk (sri-lanka)
+        if (countryLangCode === 'ta') countryLangCode = 'in';
+        if (countryLangCode === 'hi') countryLangCode = 'in';
+        if (countryLangCode === 'ko') countryLangCode = 'kp';
+        if (countryLangCode === 'da') countryLangCode = 'dk';
+        // * cn / zh --> cn (cina)
+        if (countryLangCode === 'zh') countryLangCode = 'cn';
+
+
+
+        return `${flagsApiBaseUrl}/${countryLangCode.toUpperCase()}/flat/64.png`;
+    };
+
+
+
     const fetchMovies = (queryString) => {
         axios.
             get(`${apiUrl}/search/movie?${queryString}`)
             .then(response => {
+                // console.info("response.data.results", response.data.results);
+                // console.info("response.data.results[0]", response.data.results[0]);
                 const movies = response.data.results.map(movie => ({ 
                     id: movie.id, 
                     title: movie.title, 
                     originalTitle: movie.original_title, 
                     voteAverage: movie.vote_average, 
-                    originalLanguage: movie.original_language, 
-                }))
+                    originalLanguage: movie.original_language,
+                    
+                    countryFlag: getFlagByCountryLangCode(movie.original_language),
+                }));
 
                 setMovies(movies);
             })
@@ -37,18 +68,22 @@ function  ProductionsProvider ({ children }) {
                 console.error(error);
             });
     };
-    
+
     const fetchSeries = (queryString) => {
         axios.
             get(`${apiUrl}/search/tv?${queryString}`)
             .then(response => {
+                // console.info("response.data.results", response.data.results);
+                // console.info("response.data.results[0]", response.data.results[0]);
                 const series = response.data.results.map(serie => ({ 
                     id: serie.id, 
                     title: serie.name, 
                     originalTitle: serie.original_name, 
                     voteAverage: serie.vote_average, 
                     originalLanguage: serie.original_language, 
-                }))
+
+                    countryFlag: getFlagByCountryLangCode(serie.original_language),
+                }));
 
                 setSeries(series);
             })

@@ -1,0 +1,6 @@
+.country-flag {
+    max-width: 32px;
+
+    /* debug */
+    border: 1px solid;
+}
