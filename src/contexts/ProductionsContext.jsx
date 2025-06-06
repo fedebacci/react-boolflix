@@ -15,27 +15,14 @@ function  ProductionsProvider ({ children }) {
     
 
     const [movies, setMovies] = useState([]);
+    const [series, setSeries] = useState([]);
 
 
 
-    const search = (searchData) => {
-        // console.debug(apiKey);
-        // console.debug(apiUrl);
-        // console.debug(searchData);
-        
-        const queryData = {
-            language,
-            api_key: apiKey,
-            query: searchData,
-        };
-        const queryString = new URLSearchParams(queryData).toString();
-        // console.debug(queryString);
-
+    const fetchMovies = (queryString) => {
         axios.
             get(`${apiUrl}/search/movie?${queryString}`)
             .then(response => {
-                // console.info(response.data);
-                // console.info(response.data.results);
                 const movies = response.data.results.map(movie => ({ 
                     id: movie.id, 
                     title: movie.title, 
@@ -43,7 +30,6 @@ function  ProductionsProvider ({ children }) {
                     voteAverage: movie.vote_average, 
                     originalLanguage: movie.original_language, 
                 }))
-                console.info(movies);
 
                 setMovies(movies);
             })
@@ -51,15 +37,48 @@ function  ProductionsProvider ({ children }) {
                 console.error(error);
             });
     };
+    
+    const fetchSeries = (queryString) => {
+        axios.
+            get(`${apiUrl}/search/tv?${queryString}`)
+            .then(response => {
+                const series = response.data.results.map(serie => ({ 
+                    id: serie.id, 
+                    title: serie.name, 
+                    originalTitle: serie.original_name, 
+                    voteAverage: serie.vote_average, 
+                    originalLanguage: serie.original_language, 
+                }))
+
+                setSeries(series);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
+
+    const search = (searchData) => {
+        
+        const queryData = {
+            language,
+            api_key: apiKey,
+            query: searchData,
+        };
+        const queryString = new URLSearchParams(queryData).toString();
+
+        fetchMovies(queryString);
+        fetchSeries(queryString);
+    };
 
 
 
     const exportObj = {
         movies,
+        series,
         search,
     };
-    // console.debug("exportObj");
-    // console.debug(exportObj);
+
+
 
     return (
         <ProductionsContext.Provider value={exportObj} >
