@@ -54,17 +54,27 @@ function  ProductionsProvider ({ children }) {
             get(`${apiUrl}/search/movie?${queryString}`)
             .then(response => {
                 // console.info("response.data.results", response.data.results);
-                console.info("response.data.results[0]", response.data.results[0]);
-                const movies = response.data.results.map(movie => ({ 
-                    id: movie.id, 
-                    title: movie.title, 
-                    originalTitle: movie.original_title, 
-                    voteAverage: movie.vote_average, 
-                    originalLanguage: movie.original_language,
+                // console.info("response.data.results[0]", response.data.results[0]);
+                const movies = response.data.results.map(movie => {
+
+                    let imageUrl = apiBaseImageUrl;
+                    if (movie.poster_path === null) {
+                        imageUrl = 'images/placeholder.jpg';
+                    } else {
+                        imageUrl += movie.poster_path
+                    }
                     
-                    countryFlag: getFlagByCountryLangCode(movie.original_language),
-                    image: apiBaseImageUrl + '/' + movie.poster_path,
-                }));
+                    return { 
+                        id: movie.id, 
+                        title: movie.title, 
+                        originalTitle: movie.original_title, 
+                        voteAverage: movie.vote_average, 
+                        originalLanguage: movie.original_language,
+                        
+                        countryFlag: getFlagByCountryLangCode(movie.original_language),
+                        image: imageUrl,
+                    }
+            });
 
                 setMovies(movies);
             })
@@ -78,17 +88,27 @@ function  ProductionsProvider ({ children }) {
             get(`${apiUrl}/search/tv?${queryString}`)
             .then(response => {
                 // console.info("response.data.results", response.data.results);
-                console.info("response.data.results[0]", response.data.results[0]);
-                const series = response.data.results.map(serie => ({ 
-                    id: serie.id, 
-                    title: serie.name, 
-                    originalTitle: serie.original_name, 
-                    voteAverage: serie.vote_average, 
-                    originalLanguage: serie.original_language, 
+                // console.info("response.data.results[0]", response.data.results[0]);
+                const series = response.data.results.map(serie => {
 
-                    countryFlag: getFlagByCountryLangCode(serie.original_language),
-                    image: apiBaseImageUrl + '/' + serie.poster_path,
-                }));
+                    let imageUrl = apiBaseImageUrl + '/';
+                    if (serie.poster_path === null) {
+                        imageUrl = 'images/placeholder.jpg';
+                    } else {
+                        imageUrl += serie.poster_path
+                    }
+                    
+                    return { 
+                        id: serie.id, 
+                        title: serie.name, 
+                        originalTitle: serie.original_name, 
+                        voteAverage: serie.vote_average, 
+                        originalLanguage: serie.original_language, 
+
+                        countryFlag: getFlagByCountryLangCode(serie.original_language),
+                        image: imageUrl,
+                    }
+                });
 
                 setSeries(series);
             })

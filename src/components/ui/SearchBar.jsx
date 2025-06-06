@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useProductions } from "../../contexts/ProductionsContext";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 
 export default function SearchBar () {
@@ -34,7 +36,7 @@ export default function SearchBar () {
                 className="btn btn-outline-success" 
                 type="submit"
             >
-                Cerca
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
             <input 
                 value={searchData}
