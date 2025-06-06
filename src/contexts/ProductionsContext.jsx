@@ -40,6 +40,7 @@ function  ProductionsProvider ({ children }) {
         if (countryLangCode === 'da') countryLangCode = 'dk';
         // * cn / zh --> cn (cina)
         if (countryLangCode === 'zh') countryLangCode = 'cn';
+        if (countryLangCode === 'el') countryLangCode = 'gr';
 
 
 

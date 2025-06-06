@@ -44,7 +44,14 @@ export default function ProductionsList ({ productions, title, children }) {
                                 </li>
                                 <li>
                                     Vote average: {production.voteAverage}
+                                    {" "}
+                                    ({Math.ceil(production.voteAverage / 2)} stars)
                                 </li>
+                                {/* <li>
+                                    {
+
+                                    }
+                                </li> */}
                             </ul>
                         </div>
                     )
