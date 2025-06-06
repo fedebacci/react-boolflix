@@ -1,3 +1,10 @@
+main {
+    background-color: #333;
+    color: #fff;
+}
+
+
+
 .country-flag {
     max-width: 32px;
 
@@ -5,8 +12,39 @@
 }
 
 
-.poster {
-    max-width: 100px;
 
+
+.production-column {
+    aspect-ratio: 342/513;
+    overflow: hidden;
+}
+
+.poster {
+    object-fit: cover;
+    
+    /* * DEBUG */
     filter: drop-shadow(0 0 1px rgba(0,0,0,.5));
+}
+/* * DEBUG (METTERE IN TRASPARENZA SUL POSTER */
+.movie-details {    
+    background-color: #222;
+}
+.movie-details > .h-100 {
+    font-size: .9rem;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+
+/* * DEBUG */
+.fa-regular {
+    /* color: transparent; */
+    color: rgba(0,0,0,.5);
+
+    /* filter: drop-shadow(0 0 1px rgba(0,0,0,1));
+    border: 1px solid blue;
+    outline: 1px solid red; */
 }

@@ -70,6 +70,7 @@ function  ProductionsProvider ({ children }) {
                         originalTitle: movie.original_title, 
                         voteAverage: movie.vote_average, 
                         originalLanguage: movie.original_language,
+                        overview: movie.overview,
                         
                         countryFlag: getFlagByCountryLangCode(movie.original_language),
                         image: imageUrl,
@@ -104,6 +105,7 @@ function  ProductionsProvider ({ children }) {
                         originalTitle: serie.original_name, 
                         voteAverage: serie.vote_average, 
                         originalLanguage: serie.original_language, 
+                        overview: serie.overview, 
 
                         countryFlag: getFlagByCountryLangCode(serie.original_language),
                         image: imageUrl,

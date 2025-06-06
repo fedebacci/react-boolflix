@@ -1,6 +1,6 @@
-export default function ProductionsList ({ productions, title, children }) {
+import ProductionCard from './ProductionCard';
 
-    
+export default function ProductionsList ({ productions, title, children }) {                                        
 
     return (
         <>
@@ -8,7 +8,7 @@ export default function ProductionsList ({ productions, title, children }) {
                 children || 
                 (
                     title &&
-                    <h2>
+                    <h2 className='mb-3'>
                         {title}
                     </h2>
                 )
@@ -17,45 +17,18 @@ export default function ProductionsList ({ productions, title, children }) {
 
             {
                 productions.length > 0 ?
-                productions.map(production => {
-                    return (
-                        <div key={production.id} className="card shadow my-3 p-3">
-                            <p className="mb-0">
-                                <strong className="me-3">
-                                    {production.title}
-                                </strong>
-                                <img 
-                                    src={production.countryFlag} 
-                                    alt={production.originalLanguage} 
-
-                                    className="country-flag"
+                <div className="row gx-1 mb-5 flex-nowrap overflow-x-scroll">
+                    {
+                        productions.map(production => {
+                            return (
+                                <ProductionCard 
+                                    key={production.id}
+                                    production={production}
                                 />
-                            </p>
-                            <img className="poster" src={production.image} alt={production.title} />
-                            {/* <a href={production.countryFlag} target="_blank">
-                                {production.countryFlag}
-                            </a> */}
-                            <ul className="mb-0">
-                                {/* <li>
-                                    Original language: {production.originalLanguage}
-                                </li> */}
-                                <li>
-                                    Original title: {production.originalTitle}
-                                </li>
-                                <li>
-                                    Vote average: {production.voteAverage}
-                                    {" "}
-                                    ({Math.ceil(production.voteAverage / 2)} stars)
-                                </li>
-                                {/* <li>
-                                    {
-
-                                    }
-                                </li> */}
-                            </ul>
-                        </div>
-                    )
-                })
+                            )
+                        })
+                    }
+                </div>
                 :
                 <p>
                     Nessuna produzione ({title}) trovata
