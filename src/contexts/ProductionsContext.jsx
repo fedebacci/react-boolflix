@@ -49,31 +49,49 @@ function  ProductionsProvider ({ children }) {
 
 
 
+    const getPosterPath = (posterPath) => {
+        return posterPath === null ? 'images/placeholder.jpg' : apiBaseImageUrl + posterPath;
+    };
+
+
+    const getVoteFullStars = (voteAverage) => {
+        const voteFullStars = [];
+        let i = 1;
+        while (i <= Math.ceil(voteAverage / 2)) {
+            voteFullStars.push(i);
+            i++;
+        }
+        return voteFullStars;
+    };
+    const getVoteEmptyStars = (voteAverage) => {
+        const voteEmptyStars = [];
+        let i = 1;
+        while (i <= 5 - Math.ceil(voteAverage / 2)) {
+            voteEmptyStars.push(i);
+            i++;
+        }
+        return voteEmptyStars;
+    };
+
+
+
     const fetchMovies = (queryString) => {
         axios.
             get(`${apiUrl}/search/movie?${queryString}`)
             .then(response => {
-                // console.info("response.data.results", response.data.results);
-                // console.info("response.data.results[0]", response.data.results[0]);
                 const movies = response.data.results.map(movie => {
-
-                    let imageUrl = apiBaseImageUrl;
-                    if (movie.poster_path === null) {
-                        imageUrl = 'images/placeholder.jpg';
-                    } else {
-                        imageUrl += movie.poster_path
-                    }
-                    
                     return { 
                         id: movie.id, 
                         title: movie.title, 
                         originalTitle: movie.original_title, 
-                        voteAverage: movie.vote_average, 
+                        // voteAverage: movie.vote_average, 
                         originalLanguage: movie.original_language,
                         overview: movie.overview,
                         
                         countryFlag: getFlagByCountryLangCode(movie.original_language),
-                        image: imageUrl,
+                        image: getPosterPath(movie.poster_path),
+                        voteFullStars: getVoteFullStars(movie.vote_average),
+                        voteEmptyStars: getVoteEmptyStars(movie.vote_average),
                     }
             });
 
@@ -88,27 +106,19 @@ function  ProductionsProvider ({ children }) {
         axios.
             get(`${apiUrl}/search/tv?${queryString}`)
             .then(response => {
-                // console.info("response.data.results", response.data.results);
-                // console.info("response.data.results[0]", response.data.results[0]);
-                const series = response.data.results.map(serie => {
-
-                    let imageUrl = apiBaseImageUrl + '/';
-                    if (serie.poster_path === null) {
-                        imageUrl = 'images/placeholder.jpg';
-                    } else {
-                        imageUrl += serie.poster_path
-                    }
-                    
+                const series = response.data.results.map(serie => {                    
                     return { 
                         id: serie.id, 
                         title: serie.name, 
                         originalTitle: serie.original_name, 
-                        voteAverage: serie.vote_average, 
+                        // voteAverage: serie.vote_average, 
                         originalLanguage: serie.original_language, 
                         overview: serie.overview, 
 
                         countryFlag: getFlagByCountryLangCode(serie.original_language),
-                        image: imageUrl,
+                        image: getPosterPath(serie.poster_path),
+                        voteFullStars: getVoteFullStars(serie.vote_average),
+                        voteEmptyStars: getVoteEmptyStars(serie.vote_average),
                     }
                 });
 

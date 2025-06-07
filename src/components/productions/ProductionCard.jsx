@@ -9,11 +9,9 @@ export default function ProductionCard ({ production }) {
     const [isShowDetails, setIsShowDetails] = useState(false);
     
     const handleMouseEnter = () => {
-        // console.info("handleMouseEnter", production);
         setIsShowDetails(true);
     };
     const handleMouseLeave = () => {
-        // console.info("handleMouseLeave", production);
         setIsShowDetails(false);
     };
 
@@ -37,36 +35,68 @@ export default function ProductionCard ({ production }) {
                         <div className="h-100">
                             <p className="mb-0">
                                 <strong>
+                                    {
+                                        production.originalTitle === production.title ?
+                                        <>
+                                            <img
+                                                src={production.countryFlag}
+                                                alt={production.originalLanguage}
+                                                className="country-flag"
+                                            />
+                                            {" "}
+                                        </>
+                                        :
+                                        ""
+                                    }
                                     Titolo:
                                 </strong>
                                 {" "}
                                 {production.title}
                             </p>
-                            <p className="mb-0">
-                                <strong>
-                                    <img
-                                        src={production.countryFlag}
-                                        alt={production.originalLanguage}
-                                        className="country-flag"
-                                    />
+                            {
+                                production.originalTitle !== production.title ?
+                                <p className="mb-0">
+                                    <strong>
+                                        <img
+                                            src={production.countryFlag}
+                                            alt={production.originalLanguage}
+                                            className="country-flag"
+                                        />
+                                        {" "}
+                                        Titolo originale:
+                                    </strong>
                                     {" "}
-                                    Titolo originale:
-                                </strong>
-                                {" "}
-                                {production.originalTitle}
-                            </p>
+                                    {production.originalTitle}
+                                </p>
+                                :
+                                ""
+                            }
+
+
+
                             <p className="mb-0">
                                 <strong>
                                     Voto:
                                 </strong>
                                 {" "}
                                 {
-                                    [1,2,3,4,5].map((number, index) => {
-                                        if (number <= Math.ceil(production.voteAverage / 2)) return <FontAwesomeIcon icon={faStar} key={index} />
-                                        return <FontAwesomeIcon icon={faStar} className='fa-regular' key={index} />
+                                    production.voteFullStars?.map(element => {
+                                        return (
+                                            <FontAwesomeIcon icon={faStar} key={element} />
+                                        )
+                                    })
+                                }
+                                {
+                                    production.voteEmptyStars?.map(element => {
+                                        return (
+                                            <FontAwesomeIcon icon={faStar} className='fa-regular' key={element} />
+                                        )
                                     })
                                 }
                             </p>
+
+
+
                             {
                                 production.overview !== "" ?
                                 <p className="mb-0">

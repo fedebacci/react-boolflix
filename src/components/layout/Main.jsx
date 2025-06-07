@@ -12,7 +12,7 @@ export default function Main () {
             <section className="py-5">
                 <div className="container">
                     <ProductionsList
-                        // title="Movies (title)"
+                        title="Movies"
                         productions={movies}
                     >
                         <h3 className='mb-1'>
@@ -20,7 +20,7 @@ export default function Main () {
                         </h3>
                     </ProductionsList>
                     <ProductionsList
-                        // title="TV Series (title)"
+                        title="TV Series"
                         productions={series}
                     >
                         <h3 className='mb-1'>
