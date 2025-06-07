@@ -4,6 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 
+// # MILESTONE 5
+import axios from 'axios';
+const apiKey = import.meta.env.VITE_THEMOVIEDB_API_KEY;
+const language = import.meta.env.VITE_APP_LANGUAGE;
+const queryData = {
+    language,
+    api_key: apiKey,
+};
+const queryString = new URLSearchParams(queryData).toString();
+
+
 
 export default function ProductionCard ({ production }) {
     const [isShowDetails, setIsShowDetails] = useState(false);
@@ -14,6 +25,39 @@ export default function ProductionCard ({ production }) {
     const handleMouseLeave = () => {
         setIsShowDetails(false);
     };
+
+
+    // # MILESTONE 5
+    if (!production.cast) {
+        const castUrl = `https://api.themoviedb.org/3/movie/${production.id}/credits?${queryString}`;
+        const fetchCast = () => {
+            axios
+                .get(castUrl)
+                .then(response => {
+                    // console.info(response.data.cast);
+                    // production.cast = response.data.cast;
+                    production.cast = response.data.cast
+                        .filter((person, index) => {
+                            return response.data.cast.indexOf(person) < 5;
+                        })
+                        .map(person => {
+                            return {
+                                id: person.id,
+                                name: person.name,
+                                character: person.character,
+                            };
+                        });
+                    console.info(production.cast);
+                })
+                .catch(error => {
+                    console.error(error);
+                    production.cast = [];
+                });
+        };
+        fetchCast();
+    }
+
+
 
     return (
         <div className="col-3">
@@ -92,6 +136,28 @@ export default function ProductionCard ({ production }) {
                                             <FontAwesomeIcon icon={faStar} className='fa-regular' key={element} />
                                         )
                                     })
+                                }
+                            </p>
+
+
+
+                            <p className="mb-0">
+                                <strong>
+                                    Cast:
+                                </strong>
+                                {" "}
+                                {
+                                    production.cast.length > 0 ?
+                                    production.cast.map(person => {
+                                        return (
+                                            production.cast.indexOf(person) + 1 < production.cast.length ?
+                                            `${person.name}, `
+                                            :
+                                            person.name
+                                        )
+                                    })
+                                    :
+                                    "Sconosciuto"
                                 }
                             </p>
 
