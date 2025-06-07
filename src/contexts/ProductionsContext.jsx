@@ -75,47 +75,47 @@ function  ProductionsProvider ({ children }) {
 
 
 
-    const fetchCast = (id, type) => {
+    // const fetchCast = (id, type) => {
 
-            const queryData = {
-                language,
-                api_key: apiKey,
-            };
-            const queryString = new URLSearchParams(queryData).toString();
-            const castUrl = `https://api.themoviedb.org/3/${type}/${id}/credits?${queryString}`;
+    //         const queryData = {
+    //             language,
+    //             api_key: apiKey,
+    //         };
+    //         const queryString = new URLSearchParams(queryData).toString();
+    //         const castUrl = `https://api.themoviedb.org/3/${type}/${id}/credits?${queryString}`;
 
 
-            let cast = [];
-            axios
-                .get(castUrl)
-                .then(response => {
-                    console.info("response.data", response.data);
-                    // console.info("response.data.cast", response.data.cast);
-                    cast = response.data.cast
-                        .filter((person, index) => {
-                            return response.data.cast.indexOf(person) < 5;
-                        })
-                        .map(person => {
-                            return {
-                                id: person.id,
-                                name: person.name,
-                                character: person.character,
-                            };
-                        });
-                    console.info("cast TROVATO E RIDOTTO", cast);
+    //         let cast = [];
+    //         axios
+    //             .get(castUrl)
+    //             .then(response => {
+    //                 console.info("response.data", response.data);
+    //                 // console.info("response.data.cast", response.data.cast);
+    //                 cast = response.data.cast
+    //                     .filter((person, index) => {
+    //                         return response.data.cast.indexOf(person) < 5;
+    //                     })
+    //                     .map(person => {
+    //                         return {
+    //                             id: person.id,
+    //                             name: person.name,
+    //                             character: person.character,
+    //                         };
+    //                     });
+    //                 console.info("cast TROVATO E RIDOTTO", cast);
 
-                    // ! NON RITORNA VALORE
-                    return cast;
-                })
-                .catch(error => {
-                    console.error(error);
-                    if (error.status === 404) console.error(`Cast non trovato per la produzione: ${id}`);
-                    return [];
-                });
+    //                 // ! NON RITORNA VALORE
+    //                 return cast;
+    //             })
+    //             .catch(error => {
+    //                 console.error(error);
+    //                 if (error.status === 404) console.error(`Cast non trovato per la produzione: ${id}`);
+    //                 return [];
+    //             });
 
-            // ! DA ARRAY VUOTO
-            return cast;
-        };
+    //         // ! DA ARRAY VUOTO
+    //         return cast;
+    //     };
 
 
 
@@ -139,7 +139,7 @@ function  ProductionsProvider ({ children }) {
                         image: getPosterPath(movie.poster_path),
                         voteFullStars: getVoteFullStars(movie.vote_average),
                         voteEmptyStars: getVoteEmptyStars(movie.vote_average),
-                        cast: fetchCast(movie.id, 'movie'),
+                        // cast: fetchCast(movie.id, 'movie'),
                     }
             });
 
@@ -170,7 +170,7 @@ function  ProductionsProvider ({ children }) {
                         image: getPosterPath(serie.poster_path),
                         voteFullStars: getVoteFullStars(serie.vote_average),
                         voteEmptyStars: getVoteEmptyStars(serie.vote_average),
-                        cast: fetchCast(serie.id, 'tv'),
+                        // cast: fetchCast(serie.id, 'tv'),
                     }
                 });
 
